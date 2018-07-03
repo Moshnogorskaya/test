@@ -1,0 +1,84 @@
+<template>
+   <button
+     @click='onClick'
+      class='search__button'>
+      <span>{{ text }}</span>
+    </button>
+</template>
+
+<script>
+
+import { setTimeout } from 'timers';
+
+export default {
+  name: 'submit',
+  components: {
+  },
+  data() {
+    return {
+      text: 'SEARCH',
+      waiting: false,
+    };
+  },
+  methods: {
+    onClick() {
+      if (!this.waiting) {
+        this.waiting = true;
+        this.text = 'LOADING...';
+        this.$emit('clickSearch');
+        setTimeout(() => this.beReady(), 2000);
+      }
+    },
+    beReady() {
+      this.waiting = false;
+      this.text = 'SEARCH';
+    },
+  },
+};
+</script>
+
+<style>
+.search__button {
+  font-size: 12px;
+  font-weight: 100;
+  height: 33px;
+  width: 13%;
+  background: #0366d6;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
+.search__button:active {
+  box-shadow: none;
+}
+.search__button:focus {
+  outline: 0;
+}
+
+.search__button span {
+  transition: 0.5s;
+}
+
+.search__button span:after {
+  content: '. . .';
+  position: absolute;
+  opacity: 0;
+  top: 8px;
+  right: -10px;
+  transition: 0.5s;
+}
+
+.search__button.disabled span {
+  padding-right: 10px;
+}
+
+.search__button.disabled span:after {
+  opacity: 1;
+  right: 20px;
+}
+</style>

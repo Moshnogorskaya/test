@@ -1,31 +1,92 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <div class="app">
+    <div class='wrapper'>
+      <navigation />
+      <keep-alive include='search'>
+        <router-view
+          @gotFreshRepos='prepareRepos'
+          @toggleRepo='toggleRepo'
+          :repos='repos'
+          :savedRepos='savedRepos' />
+      </keep-alive>
     </div>
-    <router-view/>
+    <footer-info />
   </div>
 </template>
 
+<script>
+
+import Navigation from '@/components/header/Navigation.vue';
+import FooterInfo from '@/components/FooterInfo.vue';
+import prepareDataToDisplay from '@/components/utility/prepare-data-to-display';
+
+export default {
+  name: 'app',
+  components: {
+    Navigation,
+    FooterInfo,
+  },
+  data() {
+    return {
+      repos: {},
+      savedRepos: {},
+    };
+  },
+  methods: {
+    prepareRepos(repos) {
+      this.repos = prepareDataToDisplay(repos, this.savedRepos);
+    },
+    toggleRepo(id) {
+      this.repos[id].saved = !this.repos[id].saved;
+      if (this.savedRepos[id]) {
+        delete this.savedRepos[id];
+      } else {
+        this.savedRepos[id] = this.repos[id];
+      }
+    },
+  },
+};
+</script>
+
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 1000px;
+  font-family: Roboto, sans-serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+div,
+a,
+h1,
+p,
+ul,
+li,
+form,
+input,
+select,
+button {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0px;
+  appearance: none;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.app {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.wrapper {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 </style>

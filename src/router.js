@@ -1,21 +1,26 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import About from './views/About.vue';
+import Search from './views/Search.vue';
+import MyList from './views/MyList.vue';
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home,
+      redirect: 'search',
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About,
+      path: '/search',
+      name: 'search',
+      component: Search,
+    },
+    {
+      path: '/my-list',
+      name: 'my-list',
+      component: MyList,
     },
   ],
 });
