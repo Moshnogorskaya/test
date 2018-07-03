@@ -1,5 +1,5 @@
 <template>
-  <div class='select__group'
+  <div
     :class="['select__group', { select__group_error: valid === false && active === false }]"
   >
       <select
