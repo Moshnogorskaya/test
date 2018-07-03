@@ -36,15 +36,21 @@ describe('My Second Test', () => {
         }, 2000);
       });
     }
-
     cy.wrap(null).then(() =>
       waitTwoSeconds().then(() => {
         cy.get('.results');
         expect(waited).to.eq(true);
       }));
   });
+
   it('Saves a repo', () => {
     cy.get(':nth-child(1) > .repo > .wrapper-repo-action > .repo__action').click();
-    cy.visit('/my-list');
+    cy.get('.header__my-list-link').click();
+    cy.get('.repo');
+  });
+
+  it('Deletes repo', () => {
+    cy.get('.repo__action').click();
+    cy.contains('NOTHING THERE');
   });
 });
