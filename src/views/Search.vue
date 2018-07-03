@@ -15,7 +15,7 @@
 import SearchPanel from '@/components/searchPanel/SearchPanel.vue';
 import Results from '@/components/Results.vue';
 import NoResults from '@/components/NoResults.vue';
-import getGithubData from '@/components/utility/get-github-data';
+import getGithubData from '@/components/utility/getGithubData';
 
 export default {
   name: 'search',

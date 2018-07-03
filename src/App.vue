@@ -18,7 +18,7 @@
 
 import Navigation from '@/components/header/Navigation.vue';
 import FooterInfo from '@/components/FooterInfo.vue';
-import prepareDataToDisplay from '@/components/utility/prepare-data-to-display';
+import prepareDataToDisplay from '@/components/utility/prepareDataToDisplay';
 
 export default {
   name: 'app',

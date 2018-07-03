@@ -8,6 +8,8 @@ describe('DashboardViewInfo.vue', () => {
     const wrapper = shallowMount(DashboardViewInfo, {
       propsData: { repo },
     });
-    expect(wrapper.text()).to.include(repo.name, repo.description);
+    expect(wrapper.text()).to.include(repo.name)
+      .and.include(repo.description)
+      .and.include(repo.topics[0]);
   });
 });

@@ -3,21 +3,13 @@ import { shallowMount } from '@vue/test-utils';
 import NoResults from '../../src/components/NoResults.vue';
 
 describe('NoResults.vue', () => {
-  it('renders props.heading when passed', () => {
+  it('renders props when passed', () => {
     const heading = 'no results';
-    const wrapper = shallowMount(NoResults, {
-      propsData: { heading },
-    });
-    expect(wrapper.text()).to.include(heading);
-  });
-});
-
-describe('NoResults.vue', () => {
-  it('renders props.text when passed', () => {
     const text = 'try again';
     const wrapper = shallowMount(NoResults, {
-      propsData: { text },
+      propsData: { heading, text },
     });
-    expect(wrapper.text()).to.include(text);
+    expect(wrapper.text()).to.include(heading)
+      .and.include(text);
   });
 });
